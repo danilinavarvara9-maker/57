@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 21. Деление на 10, 100, 1000. Деление круглых чисел — 3 класс</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/neucha@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/nunito@latest/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/nunito@latest/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/nunito@latest/800.css">
+<style>
+:root{--blue:#cfe0ef;--blue2:#8fb4d2;--peach:#ffd8b6;--peach2:#f7b98a;--paper:#fffdf6;--ink:#33424e;--line:#d3e5f2;--red:#c95b57;--redL:#e8a5a2;--green:#5f9e6b;--greenL:#ddefdd;--gold:#e8b64c;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;color:var(--ink);font-size:19px;
+background:radial-gradient(1100px 600px at 90% -10%,#ffe3c9b0,transparent 60%),radial-gradient(900px 520px at -10% 30%,#cfe3f5b0,transparent 60%),radial-gradient(1000px 700px at 50% 110%,#f4ead8cc,transparent 60%),#f7f3ea;
+min-height:100vh;padding:86px 12px 110px;}
+#topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:12px;background:linear-gradient(#a8c6e2,#8fb4d2);padding:10px 16px;box-shadow:0 3px 10px #0003;border-bottom:3px solid #6f97b8;}
+#topbar .tbLeft{font-family:'Neucha',cursive;font-size:22px;background:#fff;border-radius:8px;padding:2px 12px;box-shadow:0 2px 0 #6f97b8;}
+#topbar .tbTitle{flex:1;text-align:center;color:#fff;font-weight:800;font-size:17px;text-shadow:0 1px 2px #0004;}
+#topbar .tbRight span{background:#fff;border-radius:10px;padding:3px 10px;font-weight:800;font-size:15px;}
+#progress{position:fixed;top:60px;left:0;right:0;height:10px;background:#e8dfcd;z-index:50;box-shadow:inset 0 2px 4px #0002;}
+#progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--peach2),var(--gold));transition:width .4s;}
+#progressPencil{position:absolute;top:-9px;left:0%;transform:translateX(-50%);font-size:20px;transition:left .4s;}
+.screen{display:none;max-width:1020px;margin:0 auto;}
+.screen.active{display:block;animation:fadeUp .45s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.sheet{position:relative;background:var(--paper);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:26px 26px;border:1px solid #e3d9c6;border-radius:6px;box-shadow:0 12px 26px rgba(70,60,40,.18),0 2px 6px rgba(70,60,40,.12);padding:30px 26px 26px 76px;margin:22px auto;}
+.sheet::before{content:"";position:absolute;left:56px;top:0;bottom:0;width:2px;background:var(--redL);opacity:.8;}
+.tape{position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-2deg);width:150px;height:28px;background:#efe5c9d9;border-left:2px dashed #d8caa8;border-right:2px dashed #d8caa8;box-shadow:0 2px 4px #0002;}
+h2{font-family:'Neucha',cursive;font-size:31px;margin:4px 0 10px;color:#2c4a63;border-bottom:3px solid var(--peach);display:inline-block;padding-bottom:2px;}
+.task{font-size:20px;margin:6px 0 14px;}
+.hint{color:#7a8894;font-size:16px}
+.boardWrap{max-width:880px;margin:26px auto 6px;padding:0 8px;}
+.board{background:radial-gradient(120% 120% at 30% 20%,#3a6b5c,#2c564a 70%);border:12px solid #b98a5a;outline:3px solid #8a6543;border-radius:10px;box-shadow:inset 0 0 60px #0007,0 16px 34px #0004;color:#f3f7ee;font-family:'Neucha',cursive;text-align:center;padding:32px 22px 38px;}
+.board .chalkDate{font-size:44px;letter-spacing:2px;text-shadow:0 0 6px #ffffff55;}
+.board h1{font-size:32px;margin:12px 0 6px;text-shadow:0 0 5px #ffffff44;line-height:1.25;}
+.board p{margin:2px;font-size:21px;color:#ffe9c9;}
+.board .chalkNote{margin-top:12px;font-size:19px;color:#cfe8d8;}
+.boardTray{width:70%;margin:-6px auto 0;height:16px;background:#a97c4f;border-radius:4px;box-shadow:0 4px 8px #0004;display:flex;gap:14px;align-items:center;justify-content:center;font-size:14px;}
+.btn{font:800 20px 'Nunito',sans-serif;color:var(--ink);padding:12px 26px;border-radius:14px;border:2px solid var(--ink);background:#fff;box-shadow:0 4px 0 var(--ink);cursor:pointer;transition:transform .1s,box-shadow .1s;}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn.primary{background:var(--peach)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{padding:8px 18px;font-size:18px}
+#bottomNav{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justify-content:center;gap:16px;padding:14px 12px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(#f4ead800,#f4ead8ee 40%);}
+#bottomNav.hide{display:none}
+.theoryBox{background:#eaf3fb;border:2px solid var(--blue2);border-radius:14px;padding:16px 20px;font-size:20px;}
+.theoryBox b{color:#2c4a63}
+.theoryBox .ex{color:#566573;font-size:18px}
+.qblock{background:#ffffffb8;border:2px solid #e2d7c2;border-radius:14px;padding:14px 16px;margin:12px 0;}
+.qblock .qtext{font-size:21px;font-weight:700;margin-bottom:10px;}
+.opts{display:flex;flex-wrap:wrap;gap:10px;}
+.opt{font:700 19px 'Nunito',sans-serif;padding:10px 18px;border-radius:12px;border:2px solid var(--blue2);background:#fff;cursor:pointer;box-shadow:0 3px 0 var(--blue2);}
+.opt.yes{background:var(--greenL);border-color:var(--green);color:#2c5e39;box-shadow:0 3px 0 var(--green);}
+.opt.no{background:#fdeaea;border-color:var(--red);color:var(--red);animation:shake .4s;}
+.qblock.solved{border-color:var(--green);background:#f2faf2;}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.shake{animation:shake .4s}
+/* схемы взаимно обратных */
+.schRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border:2px solid #d8b98a;border-radius:14px;padding:12px 16px;margin:10px 0;justify-content:center;}
+.schBox{font:800 24px 'Nunito';background:#fff8ef;border:2px solid var(--peach2);border-radius:10px;padding:8px 18px;}
+.schArr{display:flex;flex-direction:column;align-items:center;font-weight:800;color:#2c4a63;font-size:18px;line-height:1.2;}
+.cardGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:12px 0;}
+.calcCard{background:#fff;border:2px solid var(--blue2);border-radius:14px;padding:12px 10px;text-align:center;box-shadow:0 4px 0 var(--blue2);}
+.calcCard .expr{font:800 21px 'Nunito';margin-bottom:8px;color:#2c4a63;}
+.calcCard input{font:800 22px 'Nunito';width:120px;padding:5px;text-align:center;border:2px solid var(--peach2);border-radius:10px;background:#fff8ef;}
+.calcCard input.good{border-color:var(--green);background:var(--greenL);color:#2c5e39;}
+.calcCard input.bad{border-color:var(--red);background:#fdeaea;animation:shake .4s;}
+.calcCard.okCard{border-color:var(--green);background:var(--greenL);box-shadow:0 4px 0 var(--green);}
+.probBlock{background:#ffffffb8;border:2px solid #e2d7c2;border-radius:14px;padding:14px 16px;margin:12px 0;}
+.probBlock.okBlock{border-color:var(--green);background:#f2faf2;}
+.probText{font-size:20px;font-weight:700;margin-bottom:10px;}
+.probRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0;}
+.probRow input{font:800 22px 'Nunito';width:160px;padding:6px;text-align:center;border:3px solid var(--blue2);border-radius:12px;background:#fff;}
+.probRow input.good{border-color:var(--green);background:var(--greenL);color:#2c5e39;}
+.probRow input.bad{border-color:var(--red);background:#fdeaea;animation:shake .4s;}
+.probHint{margin-top:8px;color:#b9892f;font-weight:700;font-size:17px;}
+.refChips{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 4px;}
+.refChip{font:700 17px 'Nunito';border:2px solid var(--blue2);background:#fff;border-radius:20px;padding:8px 16px;cursor:pointer;}
+.refChip.on{background:var(--blue);border-color:var(--blue2);box-shadow:inset 0 2px 4px #0002;}
+.moodRow{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
+.mood{font-size:40px;background:#fff;border:3px solid #e2d7c2;border-radius:16px;padding:10px 16px;cursor:pointer;}
+.mood.sel{border-color:var(--gold);background:#fff8ef;transform:scale(1.1);}
+.mood small{display:block;font:700 14px 'Nunito';color:#7a8894;}
+.finalRow{display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
+.stampCircle{min-width:110px;height:110px;padding:0 14px;border:4px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font:400 30px 'Neucha',cursive;color:var(--red);transform:rotate(-8deg);background:#fff;text-align:center;}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:#2c4a63;color:#fff;font-weight:800;padding:12px 22px;border-radius:14px;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:88%;text-align:center;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#toast.good{background:var(--green)}
+#toast.bad{background:var(--red)}
+@media (max-width:760px){
+body{font-size:17px;padding-top:80px}
+.sheet{padding:24px 14px 18px 48px}
+.sheet::before{left:32px}
+.board .chalkDate{font-size:34px}
+.board h1{font-size:25px}
+#topbar .tbTitle{font-size:12px}
+h2{font-size:25px}
+.calcCard input{width:100px;font-size:19px}
+.probRow input{width:130px;font-size:19px}
+}
+</style>
+</head>
+<body>
+<header id="topbar">
+<div class="tbLeft">Урок 21</div>
+<div class="tbTitle">Деление на 10, 100, 1000. Деление круглых чисел</div>
+<div class="tbRight"><span id="pageChip">1/10</span></div>
+</header>
+<div id="progress"><div id="progressFill"></div><span id="progressPencil">✏️</span></div>
+<main id="app">
+
+<section class="screen active" id="s0">
+<div class="boardWrap">
+<div class="board">
+<div class="chalkDate">28 октября</div>
+<h1>Урок 21. Деление на 10, 100, 1000…<br>Деление круглых чисел</h1>
+<p>Математика • 3 «А» класс</p>
+<div class="chalkNote">Отбрасываем нули — и делим мгновенно! ✏️</div>
+</div>
+<div class="boardTray">🖍️ ️</div>
+</div>
+<div class="sheet">
+<span class="tape"></span>
+<h2>📚 План урока</h2>
+<ol class="task">
+<li>Найди неизвестную операцию: взаимно обратные действия.</li>
+<li>Деление на 10, 100, 1000…: правило и схемы.</li>
+<li>Выполни действия: сбрасываем нули.</li>
+<li>Деление круглых чисел: два правила и сравнение примеров.</li>
+<li>Выбери правило и сосчитай.</li>
+<li>Выполни деление и обоснуй ответ.</li>
+<li>Реши уравнения с проверкой.</li>
+<li>Рефлексия.</li>
+</ol>
+<p class="hint">Листать можно кнопками «Далее/Назад», стрелками ← → или свайпами — в любой момент!</p>
+</div>
+</section>
+
+<section class="screen" id="s1">
+<div class="sheet"><span class="tape"></span>
+<h2>1. Неизвестная операция 🐝</h2>
+<p class="task">Найди неизвестную операцию в схемах. Какие операции называют взаимно обратными?</p>
+<div class="schRow"><span class="schBox">4</span><span class="schArr"><span>+5 →</span><span>← ?</span></span><span class="schBox">9</span></div>
+<div class="schRow"><span class="schBox">6</span><span class="schArr"><span>·2 →</span><span>← ?</span></span><span class="schBox">12</span></div>
+<div id="q1"></div>
+</div>
+</section>
+
+<section class="screen" id="s2">
+<div class="sheet"><span class="tape"></span>
+<h2>2. Деление на 10, 100, 1000… 🌰</h2>
+<p class="task">а) Вспомни правило деления на 10 и на 100. б) По схемам выполни деление на 1000 и на 10 000: 28 →·1000→ 28 000 и 60 →·10 000→ 600 000.</p>
+<div id="task2in"></div>
+<div class="theoryBox">
+<b>Деление числа на 10, 100, 1000…</b><br>
+При делении числа на 10, 100, 1000 и т. д. можно отбросить справа соответственно 1 нуль, 2 нуля, 3 нуля и т. д.<br>
+<span class="ex">□0 : 10 = □ &nbsp;&nbsp; □00 : 100 = □ &nbsp;&nbsp; □000 : 1000 = □ &nbsp;&nbsp; и т. д.</span>
+</div>
+<div id="q2"></div>
+</div>
+</section>
+
+<section class="screen" id="s3">
+<div class="sheet"><span class="tape"></span>
+<h2>3. Выполни действия ✂️</h2>
+<p class="task">Отбрось нужное число нулей и впиши ответ. Затем «Проверить всё».</p>
+<div class="cardGrid" id="grid3"></div>
+<p><button class="btn primary" id="check3" type="button">Проверить всё ✔</button></p>
+</div>
+</section>
+
+<section class="screen" id="s4">
+<div class="sheet"><span class="tape"></span>
+<h2>4. Деление круглых чисел 🐻</h2>
+<p class="task">Закончи решение примеров и сравни их.</p>
+<div class="cardGrid" id="grid4"></div>
+<p><button class="btn primary" id="check4" type="button">Проверить всё ✔</button></p>
+<div class="theoryBox">
+<b>Правило 1.</b> При делении круглых чисел (без остатка) можно отбросить в делимом и делителе поровну нулей: □000 : □00 = □0 : □.<br>
+<b>Правило 2.</b> При делении круглых чисел (без остатка) можно отбросить в делимом нули справа, а потом приписать их к частному: □00 : □ = (□ : □)00.
+</div>
+<div id="q4"></div>
+</div>
+</section>
+
+<section class="screen" id="s5">
+<div class="sheet"><span class="tape"></span>
+<h2>5. Выбери правило и сосчитай 🧠</h2>
+<p class="task">Образец: 42 000 : 700 = 420 : 7 = 60. Реши остальные по этому образцу.</p>
+<div class="cardGrid" id="grid5"></div>
+<p><button class="btn primary" id="check5" type="button">Проверить всё ✔</button></p>
+</div>
+</section>
+
+<section class="screen" id="s6">
+<div class="sheet"><span class="tape"></span>
+<h2>6. Выполни деление и обоснуй ✍️</h2>
+<p class="task">Выполни деление и обоснуй свой ответ (каким правилом пользуешься?).</p>
+<div class="cardGrid" id="grid6"></div>
+<p><button class="btn primary" id="check6" type="button">Проверить всё ✔</button></p>
+</div>
+</section>
+
+<section class="screen" id="s7">
+<div class="sheet"><span class="tape"></span>
+<h2>7. Уравнения с проверкой ⚖️</h2>
+<p class="task">Реши уравнения с комментированием и сделай проверку. Впиши корень.</p>
+<div id="task7"></div>
+</div>
+</section>
+
+<section class="screen" id="s8">
+<div class="sheet"><span class="tape"></span>
+<h2>8. Рефлексия 🌈</h2>
+<p class="task">Отметь, что ты узнал(а):</p>
+<div class="refChips" id="refKnow"></div>
+<p class="task">Что получилось:</p>
+<div class="refChips" id="refCan"></div>
+<p class="task">С каким настроением ты уходишь с урока?</p>
+<div class="moodRow" id="refMood"></div>
+</div>
+</section>
+
+<section class="screen" id="s9">
+<div class="sheet"><span class="tape"></span>
+<h2>Дневник урока 📔</h2>
+<div class="finalRow">
+<div class="stampCircle">Молодец!</div>
+<div>
+<p id="fText" style="font-size:24px;font-weight:800;margin:6px">Урок окончен! 🎉</p>
+<p id="fStats" style="margin:6px;color:#6b7a88"></p>
+<p class="hint">Можно вернуться «Назад» и повторить любое задание.</p>
+</div>
+</div>
+<p style="margin-top:18px"><button class="btn primary" id="restartBtn" type="button">🔁 Пройти ещё раз</button></p>
+</div>
+</section>
+
+</main>
+<nav id="bottomNav">
+<button id="backBtn" class="btn" type="button">← Назад</button>
+<button id="nextBtn" class="btn primary" type="button">Начать урок →</button>
+</nav>
+<div id="toast"></div>
+<script>
+"use strict";
+var $=function(s){return document.querySelector(s);};
+var $$=function(s){return Array.from(document.querySelectorAll(s));};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var current=0;
+var screens=$$('.screen');
+var done=new Array(screens.length).fill(false);
+var chosenMood='';
+var toastT=null;
+function toast(m,t){var e=$('#toast');e.textContent=m;e.className='show '+(t||'');clearTimeout(toastT);toastT=setTimeout(function(){e.className='';},2400);}
+function buildFinal(){
+  var completed=done.slice(1,8).filter(Boolean).length;
+  $('#fText').textContent=completed===7?'Урок окончен! Все задания выполнены! 🎉':'Урок окончен! 🎉';
+  $('#fStats').textContent='Выполнено заданий: '+completed+' / 7 · Настроение: '+(chosenMood||'—');
+}
+function updateNav(){
+  $('#pageChip').textContent=(current+1)+'/'+screens.length;
+  var p=current/(screens.length-1)*100;
+  $('#progressFill').style.width=p+'%';$('#progressPencil').style.left=p+'%';
+  $('#backBtn').disabled=(current===0);
+  if(current===screens.length-1){$('#bottomNav').classList.add('hide');return;}
+  $('#bottomNav').classList.remove('hide');
+  var nb=$('#nextBtn');
+  nb.textContent=current===0?'Начать урок →':(current===8?'Завершить урок ✔':'Далее →');
+  nb.disabled=false;
+}
+function show(i){
+  current=Math.max(0,Math.min(screens.length-1,i));
+  for(var idx=0;idx<screens.length;idx++){screens[idx].classList.toggle('active',idx===current);}
+  if(current===9){buildFinal();}
+  updateNav();window.scrollTo(0,0);
+}
+function setDone(i){if(done[i])return;done[i]=true;toast('✔ Задание выполнено!','good');updateNav();}
+function next(){show(current+1);}
+function prev(){show(current-1);}
+$('#nextBtn').addEventListener('click',function(){next();});
+$('#backBtn').addEventListener('click',function(){prev();});
+document.addEventListener('keydown',function(e){if(e.target&&e.target.tagName==='INPUT')return;if(e.key==='ArrowRight'){next();}if(e.key==='ArrowLeft'){prev();}});
+var swStart=null;
+$('#app').addEventListener('pointerdown',function(e){if(e.target.closest('input'))return;swStart={x:e.clientX,y:e.clientY};});
+$('#app').addEventListener('pointerup',function(e){if(!swStart)return;var dx=e.clientX-swStart.x,dy=e.clientY-swStart.y;swStart=null;if(Math.abs(dx)>70&&Math.abs(dy)<50){if(dx<0){next();}else{prev();}}});
+
+function renderMC(container,items,onComplete){
+  if(!container){return;}
+  var solved=0;
+  items.forEach(function(it){
+    var block=document.createElement('div');block.className='qblock';
+    var h=document.createElement('div');h.className='qtext';h.innerHTML=it.q;block.appendChild(h);
+    var row=document.createElement('div');row.className='opts';
+    shuffle(it.o).forEach(function(o){
+      var b=document.createElement('button');b.type='button';b.className='opt';b.innerHTML=o;
+      b.addEventListener('click',function(){
+        if(block.classList.contains('solved')){return;}
+        if(o===it.c){block.classList.add('solved');b.classList.add('yes');if(it.fb){setTimeout(function(){toast(it.fb,'good');},150);}solved++;if(solved===items.length){onComplete();}}
+        else{b.classList.add('no');setTimeout(function(){b.classList.remove('no');},700);}
+      });
+      row.appendChild(b);
+    });
+    block.appendChild(row);container.appendChild(block);
+  });
+}
+
+function makeCardGrid(hostId,items,checkBtnId,onAllDone,okMsg){
+  var host=$(hostId);
+  items.forEach(function(it){
+    var card=document.createElement('div');card.className='calcCard';
+    card.innerHTML='<div class="expr">'+it.expr+'</div><input inputmode="numeric" placeholder="?">';
+    host.appendChild(card);
+    it.input=card.querySelector('input');it.card=card;
+  });
+  $(checkBtnId).addEventListener('click',function(){
+    var anyBad=false;
+    items.forEach(function(it){
+      if(it.input.disabled){return;}
+      var v=parseInt(it.input.value,10);
+      if(v===it.v){it.input.classList.add('good');it.input.disabled=true;it.card.classList.add('okCard');}
+      else{it.input.classList.add('bad');anyBad=true;setTimeout(function(){it.input.classList.remove('bad');},700);}
+    });
+    var left=items.filter(function(it){return !it.input.disabled;}).length;
+    if(left===0){onAllDone();if(okMsg){toast(okMsg,'good');}}
+    else if(anyBad){toast('Проверь красные карточки: отбрось нули поровну или справа','bad');}
+    else{toast('Осталось карточек: '+left,'good');}
+  });
+}
+
+/* ===== 1. взаимно обратные ===== */
+renderMC($('#q1'),[
+ {q:'4 →(+5)→ 9. Какая операция возвращает от 9 к 4?',o:['− 5','+ 5',': 5'],c:'− 5',fb:'Сложение и вычитание — взаимно обратные операции.'},
+ {q:'6 →(·2)→ 12. Какая операция возвращает от 12 к 6?',o:[': 2','· 2','− 2'],c:': 2',fb:'Умножение и деление — взаимно обратные операции.'},
+ {q:'Какие операции называют взаимно обратными?',o:['те, что отменяют действие друг друга (сложение и вычитание, умножение и деление)','те, что дают одинаковый ответ','только умножение и сложение'],c:'те, что отменяют действие друг друга (сложение и вычитание, умножение и деление)'}
+],function(){setDone(1);});
+
+/* ===== 2. деление на 10,100,1000 ===== */
+(function(){
+  var inpDone=false,mcDone=false;
+  function tryDone(){if(inpDone&&mcDone){setDone(2);}}
+  var blk=document.createElement('div');blk.className='probBlock';
+  blk.innerHTML='<div class="probText">Вычисли:</div><div class="probRow">'+
+    '<span style="font:800 21px Nunito">360 : 10 =</span><input inputmode="numeric" style="width:100px" placeholder="?">'+
+    '<span style="font:800 21px Nunito;margin-left:12px">800 : 100 =</span><input inputmode="numeric" style="width:100px" placeholder="?">'+
+    '<span style="font:800 21px Nunito;margin-left:12px">28 000 : 1000 =</span><input inputmode="numeric" style="width:100px" placeholder="?">'+
+    '<span style="font:800 21px Nunito;margin-left:12px">600 000 : 10 000 =</span><input inputmode="numeric" style="width:100px" placeholder="?">'+
+    '<button class="btn small iCheck" type="button" style="margin-left:10px">Проверить</button></div>';
+  $('#task2in').appendChild(blk);
+  var vals=[36,8,28,60];
+  var inps=blk.querySelectorAll('input');
+  blk.querySelector('.iCheck').addEventListener('click',function(){
+    var ok=true;
+    inps.forEach(function(inp,i){
+      if(parseInt(inp.value,10)===vals[i]){inp.classList.add('good');inp.disabled=true;}
+      else{inp.classList.add('bad');ok=false;setTimeout(function(){inp.classList.remove('bad');},700);}
+    });
+    if(ok){blk.classList.add('okBlock');blk.querySelector('.iCheck').disabled=true;inpDone=true;tryDone();toast('Верно! Нули отбросили справа.','good');}
+  });
+  renderMC($('#q2'),[
+    {q:'Что ты замечаешь? Сделай вывод: при делении на 10, 100, 1000…',o:['справа отбрасывается столько нулей, сколько их в делителе','нули прибавляются','число не меняется'],c:'справа отбрасывается столько нулей, сколько их в делителе'}
+  ],function(){mcDone=true;tryDone();});
+})();
+
+/* ===== 3. выполни действия ===== */
+makeCardGrid('#grid3',[
+ {expr:'5600 : 10',v:560},{expr:'8400 : 100',v:84},{expr:'42 000 : 1000',v:42},
+ {expr:'60 000 : 10',v:6000},{expr:'75 000 : 100',v:750},{expr:'290 000 : 1000',v:290},
+ {expr:'170 000 : 1000',v:170},{expr:'9 800 000 : 10 000',v:980},{expr:'3 250 000 : 100',v:32500}
+],'#check3',function(){setDone(3);},'Все действия выполнены! ✂️');
+
+/* ===== 4. сравнение примеров ===== */
+makeCardGrid('#grid4',[
+ {expr:'36 : 4',v:9},{expr:'360 : 40',v:9},{expr:'3600 : 400',v:9},{expr:'36 000 : 4000',v:9},
+ {expr:'54 : 9',v:6},{expr:'540 : 9',v:60},{expr:'5400 : 9',v:600},{expr:'54 000 : 9',v:6000}
+],'#check4',function(){setDone(4);},'Примеры сравнены! Что замечаешь?');
+renderMC($('#q4'),[
+ {q:'Сравни столбики а): 36:4, 360:40, 3600:400, 36000:4000. Что замечаешь?',o:['частное не меняется: делимое и делитель умножали на одно и то же число','частное растёт в 10 раз','частное уменьшается'],c:'частное не меняется: делимое и делитель умножали на одно и то же число',fb:'36 д. : 4 д. = 36 с. : 4 с. = 36 т. : 4 т. = 9.'},
+ {q:'Сравни столбики б): 540:9, 5400:9, 54000:9. Что замечаешь?',o:['делимое умножали на 10 — и частное умножалось на 10','частное не менялось','частное делилось на 10'],c:'делимое умножали на 10 — и частное умножалось на 10',fb:'54 д. : 9 = 6 д. = 60 и т. д.'}
+],function(){});
+
+/* ===== 5. выбери правило ===== */
+makeCardGrid('#grid5',[
+ {expr:'240 : 60',v:4},{expr:'360 : 90',v:4},{expr:'5600 : 700',v:8},{expr:'28 000 : 4000',v:7},
+ {expr:'4500 : 5',v:900},{expr:'6300 : 70',v:90},{expr:'3000 : 500',v:6},{expr:'480 000 : 600',v:800}
+],'#check5',function(){setDone(5);},'Все произведения подобраны по правилам!');
+
+/* ===== 6. деление с обоснованием ===== */
+makeCardGrid('#grid6',[
+ {expr:'3500 : 70',v:50},{expr:'6400 : 800',v:8},{expr:'500 : 50',v:10},{expr:'54 000 : 60',v:900},
+ {expr:'560 000 : 80',v:7000},{expr:'490 000 : 700',v:700},{expr:'10 000 : 5000',v:2},{expr:'20 000 : 400',v:50}
+],'#check6',function(){setDone(6);},'Деление выполнено и обосновано! ✍️');
+
+/* ===== 7. уравнения ===== */
+(function(){
+  var EQ=[
+    {t:'x : 80 = 800',v:64000,hint:'Неизвестное делимое: x = 800 · 80. Проверка: 64 000 : 80 = 800.'},
+    {t:'2500 : x = 500',v:5,hint:'Неизвестный делитель: x = 2500 : 500. Проверка: 2500 : 5 = 500.'},
+    {t:'x · 40 = 1600',v:40,hint:'Неизвестный множитель: x = 1600 : 40. Проверка: 40 · 40 = 1600.'}
+  ];
+  var box=$('#task7'),doneCount=0;
+  EQ.forEach(function(p){
+    var blk=document.createElement('div');blk.className='probBlock';
+    blk.innerHTML='<div class="probText">'+p.t+'</div>'+
+      '<div class="probRow"><span style="font-weight:800">x =</span><input inputmode="numeric" style="width:130px" placeholder="?">'+
+      '<button class="btn small eCheck" type="button">Проверить</button></div>'+
+      '<div class="probHint" hidden>Подсказка: '+p.hint+'</div>';
+    box.appendChild(blk);
+    var inp=blk.querySelector('input'),hint=blk.querySelector('.probHint');
+    blk.querySelector('.eCheck').addEventListener('click',function(){
+      var v=parseInt(inp.value,10);
+      if(v===p.v){inp.classList.add('good');inp.disabled=true;blk.querySelector('.eCheck').disabled=true;blk.classList.add('okBlock');
+        doneCount++;if(doneCount===EQ.length){setDone(7);toast('Все уравнения решены с проверкой! ⚖️','good');}else{toast('Верно! Проверка сходится.','good');}}
+      else{inp.classList.add('bad');setTimeout(function(){inp.classList.remove('bad');},700);hint.hidden=false;}
+    });
+  });
+})();
+
+/* ===== 8. рефлексия ===== */
+(function(){
+  var know=['правило деления на 10, 100, 1000…','два правила деления круглых чисел','что такое взаимно обратные операции','частное не меняется, если делимое и делитель умножить на одно число'];
+  var can=['делить на 10, 100, 1000 устно','делить круглые числа по правилу 1','делить круглые числа по правилу 2','решать уравнения с проверкой'];
+  function fill(arr,wrap){arr.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='refChip';b.textContent=t;b.addEventListener('click',function(){b.classList.toggle('on');});wrap.appendChild(b);});}
+  fill(know,$('#refKnow'));fill(can,$('#refCan'));
+  [['😄','отличное'],['🙂','хорошее'],['😐','среднее'],['😟','грустное']].forEach(function(m){
+    var b=document.createElement('button');b.type='button';b.className='mood';b.innerHTML=m[0]+'<small>'+m[1]+'</small>';
+    b.addEventListener('click',function(){$$('#refMood .mood').forEach(function(x){x.classList.remove('sel');});b.classList.add('sel');chosenMood=m[0]+' '+m[1];setDone(8);});
+    $('#refMood').appendChild(b);
+  });
+})();
+$('#restartBtn').addEventListener('click',function(){location.reload();});
+updateNav();
+</script>
+</body>
+</html>
